@@ -1,0 +1,52 @@
+<div class="container mt-4">
+    <h2 class="text-center">Решение системы уравнений</h2>
+  
+    <div class="mb-4 text-center">
+      <label for="matrixSize">Выберите размер матрицы:</label>
+      <select id="matrixSize" class="form-select w-auto" (change)="onMatrixSizeChange($event)">
+        <option *ngFor="let size of matrixSizes" [value]="size">{{ size }}</option>
+      </select>
+    </div>
+  
+    <div class="row">
+      <div [ngClass]="{'col-md-6': matrixSize > 3, 'col-md-8': matrixSize <= 3}" [ngStyle]="{'flex-basis': getMatrixWidth(matrixSize)}">
+        <h4 class="text-center">Матрица A</h4>
+        <table class="table table-bordered">
+          <tbody>
+            <tr *ngFor="let row of matrixA; let i = index; trackBy: trackByIndex">
+              <td *ngFor="let col of row; let j = index; trackBy: trackByIndex">
+                <input type="number" [(ngModel)]="matrixA[i][j]" class="form-control" [ngModelOptions]="{ updateOn: 'blur' }"/>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+      <div [ngClass]="{'col-md-6': matrixSize > 3, 'col-md-4': matrixSize <= 3}" [ngStyle]="{'flex-basis': getVectorWidth(matrixSize)}">
+        <h4 class="text-center">b</h4>
+        <table class="table table-bordered">
+          <tbody>
+            <tr *ngFor="let value of vectorB; let i = index; trackBy: trackByIndex">
+              <td>
+                <input type="number" [(ngModel)]="vectorB[i]" class="form-control" [ngModelOptions]="{ updateOn: 'blur' }"/>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  
+    <div class="text-center mt-4">
+      <button (click)="solve()" class="btn btn-primary">Решить</button>
+    </div>
+  
+    <div class="mt-4 text-center">
+      <h4>Результат (вектор x):</h4>
+      <div *ngIf="result; else loading">
+        <strong>{{ result }}</strong>
+      </div>
+      <ng-template #loading>
+        <div>Ожидание результата...</div>
+      </ng-template>
+    </div>
+  </div>
