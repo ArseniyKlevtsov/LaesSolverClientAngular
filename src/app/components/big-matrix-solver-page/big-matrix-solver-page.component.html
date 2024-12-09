@@ -1,1 +1,96 @@
-<p>big-matrix-solver-page works!</p>
+<div class="container mt-5" style="max-width: 1000px;">
+    <h2 class="text-center mb-4">Big Matrix Task Management</h2>
+
+    <div class="mb-4">
+        <label for="taskKey" class="form-label">Enter the TaskKey:</label>
+        <input type="text" id="taskKey" class="form-control" [(ngModel)]="taskKey" placeholder="Enter the TaskKe" />
+    </div>
+
+    <div class="mb-4">
+        <label for="taskKey" class="form-label">Enter the TaskName(or leave it blank for a new task):</label>
+        <input type="text" id="taskKey" class="form-control" [(ngModel)]="taskName" placeholder="Enter the TaskName" />
+    </div>
+
+
+
+    <div class="mb-4 text-center">
+        <label class="form-label">Upload the matrix and vector files(.csv):</label>
+
+        <div class="d-flex justify-content-center">
+            <input type="file" class="form-control me-2" (change)="onMatrixFileChange($event)" />
+            <input type="file" class="form-control" (change)="onVectorFileChange($event)" />
+        </div>
+    </div>
+
+    <h4>File format description:</h4>
+    <div>
+        <ul>
+            <li>
+                <p>The matrix file should only have numbers (fractional ones are possible), have an equal number of
+                    elements in a row</p>
+            </li>
+            <li>
+                <p>The vector file should only have numbers and have as many elements as there are rows in the matrix.
+                </p>
+            </li>
+        </ul>
+        <hr>
+        <div class="mb-4 text-center">
+            <p>Example:</p>
+            <p>Matrix.csv</p>
+            <pre>
+4.0,1.0,1.0
+1.0,4.0,1.0
+1.0,1.0,4.0
+            </pre>
+            <p>VectorB.csv</p>
+            <pre>
+4.0,1.0,1.0
+            </pre>
+        </div>
+    </div>
+
+    <h4>Buttons description:</h4>
+    <div>
+        <ul>
+            <li>
+                <p>The start sending button 1. creates a task, 2. sends a vector, and 3. starts sending the matrix
+                    in
+                    chunks</p>
+            </li>
+            <li>
+                <p>The get solution button requests a solution to the task for TaskName&TaskKey</p>
+            </li>
+            <li>
+                <p>The delete task button deletes it to the servers and information about it in your storage</p>
+            </li>
+            <hr>
+            <li>
+                <p>The status button displays information about the task for TaskName&TaskKey in the status field
+                </p>
+            </li>
+            <li>
+                <p>the stop button stops sending/resending the task TaskName&TaskKey</p>
+            </li>
+            <li>
+                <p>the send the remaining button sends the parts of the matrix that are not on the server, you must be sure that
+                    you
+                    previously sent this particular file</p>
+            </li>
+        </ul>
+    </div>
+    <div class="text-center mb-4">
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button class="btn btn-primary action-btn" (click)="startSending()">Start Sending</button>
+            <button class="btn btn-success action-btn" (click)="getSolution()" [disabled]="!taskName || !taskKey">Get Solution</button>
+            <button class="btn btn-light action-btn" (click)="deleteTask()" [disabled]="!taskName || !taskKey">Delete Task</button>
+        </div>
+    </div>
+    <div class="text-center mb-4">
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button class="btn btn-info action-btn" (click)="checkStatus()" [disabled]="!taskName || !taskKey">Check Status</button>
+            <button class="btn btn-danger action-btn" (click)="stopTask()" [disabled]="!taskName || !taskKey">Stop Task</button>
+            <button class="btn btn-warning action-btn" (click)="resend()" [disabled]="!taskName || !taskKey">Send the remaining</button>
+        </div>
+    </div>
+</div>

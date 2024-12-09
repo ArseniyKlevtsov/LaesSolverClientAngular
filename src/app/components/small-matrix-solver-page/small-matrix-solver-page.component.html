@@ -1,8 +1,8 @@
 <div class="container mt-4">
-    <h2 class="text-center">Решение системы уравнений</h2>
+    <h2 class="text-center">Solving a small system of equations</h2>
   
     <div class="mb-4 text-center">
-      <label for="matrixSize">Выберите размер матрицы:</label>
+      <label for="matrixSize">Select the size of the matrix:</label>
       <select id="matrixSize" class="form-select w-auto" (change)="onMatrixSizeChange($event)">
         <option *ngFor="let size of matrixSizes" [value]="size">{{ size }}</option>
       </select>
@@ -10,7 +10,7 @@
   
     <div class="row">
       <div [ngClass]="{'col-md-6': matrixSize > 3, 'col-md-8': matrixSize <= 3}" [ngStyle]="{'flex-basis': getMatrixWidth(matrixSize)}">
-        <h4 class="text-center">Матрица A</h4>
+        <h4 class="text-center">Matrix A</h4>
         <table class="table table-bordered">
           <tbody>
             <tr *ngFor="let row of matrixA; let i = index; trackBy: trackByIndex">
@@ -23,7 +23,7 @@
       </div>
   
       <div [ngClass]="{'col-md-6': matrixSize > 3, 'col-md-4': matrixSize <= 3}" [ngStyle]="{'flex-basis': getVectorWidth(matrixSize)}">
-        <h4 class="text-center">b</h4>
+        <h4 class="text-center">B</h4>
         <table class="table table-bordered">
           <tbody>
             <tr *ngFor="let value of vectorB; let i = index; trackBy: trackByIndex">
@@ -37,16 +37,16 @@
     </div>
   
     <div class="text-center mt-4">
-      <button (click)="solve()" class="btn btn-primary">Решить</button>
+      <button (click)="solve()" class="btn btn-primary">Solve</button>
     </div>
   
     <div class="mt-4 text-center">
-      <h4>Результат (вектор x):</h4>
+      <h4>Result (vector x):</h4>
       <div *ngIf="result; else loading">
         <strong>{{ result }}</strong>
       </div>
       <ng-template #loading>
-        <div>Ожидание результата...</div>
+        <div>Waiting for the result...</div>
       </ng-template>
     </div>
   </div>
