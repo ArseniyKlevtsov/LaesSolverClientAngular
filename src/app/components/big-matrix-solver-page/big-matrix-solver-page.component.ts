@@ -184,7 +184,7 @@ export class BigMatrixSolverPageComponent implements OnInit, OnDestroy {
   private TaskSolutionHandler(message: Message): void {
     const dto = message.Dto;
     const csvContent = this.convertVectorToCSV(dto.VectorX);
-    this.downloadCSV(csvContent, `${dto.TaskName}.csv`);
+    this.downloadCSV(csvContent, `x.csv`);
 }
 
 private convertVectorToCSV(vector: number[]): string {
