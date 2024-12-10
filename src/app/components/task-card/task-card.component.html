@@ -1,0 +1,31 @@
+<div class="card mb-3" style="border-radius: 15px;">
+    <div class="card-body">
+        <h5 class="card-title">{{ taskInfo.TaskName }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Task Key: {{ taskInfo.TaskKey }}</h6>
+        
+        <div class="info-section mb-3" style="min-height: 50px;">
+            <div *ngIf="currentTaskInfo">
+                <div class="alert alert-success" role="alert">
+                    <strong>Up-to-date information (found on the server):</strong><br>
+                    Row Count: {{ currentTaskInfo.RowCount }}<br>
+                    Solved: {{ currentTaskInfo.Solved ? 'Yes' : 'No' }}<br>
+                </div>
+            </div>
+            <div *ngIf="outdatedTaskInfo">
+                <div class="alert alert-warning" role="alert">
+                    <strong>Outdated information (not found on the server, can be deleted):</strong><br>
+                    Row Count: {{ outdatedTaskInfo.RowCount }}<br>
+                    Solved: {{ outdatedTaskInfo.Solved ? 'Yes' : 'No' }}<br>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between mt-3">
+            <button class="btn btn-primary" (click)="onInfoClick()">Info</button>
+            <div>
+                <button class="btn btn-success me-2" (click)="onOpenInManagerClick()">Open in Manager</button>
+                <button class="btn btn-danger" (click)="onDeleteClick()">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>

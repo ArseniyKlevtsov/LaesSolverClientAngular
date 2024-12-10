@@ -1,3 +1,16 @@
 .action-btn {
     margin: 10px;
 }
+.console-container {
+    margin: 0 100px; 
+    height: 400px; 
+    overflow-y: auto; 
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+    background-color: #f8f9fa;
+}
+
+.console {
+    padding: 10px;
+    white-space: pre-wrap; 
+}

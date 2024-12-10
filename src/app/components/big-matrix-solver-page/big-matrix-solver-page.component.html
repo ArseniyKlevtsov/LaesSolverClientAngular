@@ -3,7 +3,7 @@
 
     <div class="mb-4">
         <label for="taskKey" class="form-label">Enter the TaskKey:</label>
-        <input type="text" id="taskKey" class="form-control" [(ngModel)]="taskKey" placeholder="Enter the TaskKe" />
+        <input type="text" id="taskKey" class="form-control" [(ngModel)]="taskKey" placeholder="Enter the TaskKey" />
     </div>
 
     <div class="mb-4">
@@ -82,8 +82,8 @@
     <div class="text-center mb-4">
         <div class="btn-group" role="group" aria-label="Basic example">
             <button class="btn btn-primary action-btn" (click)="startSending()">Start Sending</button>
+            <button class="btn btn-light action-btn" (click)="startSolving()" [disabled]="!taskName || !taskKey">Start Solving</button>
             <button class="btn btn-success action-btn" (click)="getSolution()" [disabled]="!taskName || !taskKey">Get Solution</button>
-            <button class="btn btn-light action-btn" (click)="deleteTask()" [disabled]="!taskName || !taskKey">Delete Task</button>
         </div>
     </div>
     <div class="text-center mb-4">
@@ -91,6 +91,11 @@
             <button class="btn btn-info action-btn" (click)="checkStatus()" [disabled]="!taskName || !taskKey">Check Status</button>
             <button class="btn btn-danger action-btn" (click)="stopTask()" [disabled]="!taskName || !taskKey">Stop Task</button>
             <button class="btn btn-warning action-btn" (click)="resend()" [disabled]="!taskName || !taskKey">Send the remaining</button>
+        </div>
+    </div>
+    <div class="console-container">
+        <div class="console" #consoleRef>
+            <pre>{{ logMessages.join('\n') }}</pre>
         </div>
     </div>
 </div>

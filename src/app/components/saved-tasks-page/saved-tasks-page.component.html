@@ -1,1 +1,7 @@
-<p>saved-tasks-page works!</p>
+<div class="container">
+    <h2 class="text-center mb-4">Saved task in cache</h2>
+    <div>
+        <app-task-card *ngFor="let task of tasks" [taskInfo]="task" (deleteTask)="deleteTask($event)">
+        </app-task-card>
+    </div>
+</div>

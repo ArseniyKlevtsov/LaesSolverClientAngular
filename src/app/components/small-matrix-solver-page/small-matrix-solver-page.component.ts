@@ -1,7 +1,7 @@
 import { NgClass, NgFor, NgIf, NgStyle } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, NgModel } from '@angular/forms';
-import { WebsocketLltServiceService } from '../../shared/services/websocket-llt.service.service';
+import { WebsocketLltService } from '../../shared/services/websocket-llt.service.service';
 import { Message } from '../../shared/interfaces/value-objects/message';
 
 @Component({
@@ -16,9 +16,9 @@ export class SmallMatrixSolverPageComponent implements OnInit {
   matrixA: number[][] = [];
   vectorB: number[] = [];
   result: string | null = null;
-  matrixSize: number = 2; // Начальный размер матрицы
+  matrixSize: number = 2;
 
-  constructor(private websocketService: WebsocketLltServiceService) {
+  constructor(private websocketService: WebsocketLltService) {
     this.initializeMatrices(2);
   }
 
@@ -26,7 +26,7 @@ export class SmallMatrixSolverPageComponent implements OnInit {
     this.websocketService.onMessage.subscribe((message) => {
       if (message.Command === "SmallMatrixSolution") {
         const vectorX: number[] = message.Dto.VectorX;
-        this.result = vectorX.map(value => value.toFixed(2)).join(', '); // Ограничиваем до 2 знаков
+        this.result = vectorX.map(value => value.toFixed(2)).join(', ');
         console.log(vectorX);
       }
     });
@@ -56,15 +56,14 @@ export class SmallMatrixSolverPageComponent implements OnInit {
   }
 
   getMatrixWidth(size: number): string {
-    return `${(size / (size + 1)) * 100}%`; // Динамическое вычисление ширины для матрицы
+    return `${(size / (size + 1)) * 100}%`;
   }
 
   getVectorWidth(size: number): string {
-    return `${(1 / (size + 1)) * 100}%`; // Динамическое вычисление ширины для вектора
+    return `${(1 / (size + 1)) * 100}%`;
   }
 
   solve() {
-    // Формируем объект запроса
     const message: Message = {
       Command: "SolveSmallMatrix",
       Dto: {
@@ -75,7 +74,6 @@ export class SmallMatrixSolverPageComponent implements OnInit {
 
     this.websocketService.sendMessage(message);
 
-    // Для отображения в результате
     this.result = this.vectorB.join(', ');
     console.log('Решение:', this.matrixA, this.vectorB);
   }

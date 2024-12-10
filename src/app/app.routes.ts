@@ -12,6 +12,7 @@ export const routes: Routes = [
             { path: '', redirectTo: '/smallMatrixSolver', pathMatch: "full" },
             { path: 'smallMatrixSolver', component: SmallMatrixSolverPageComponent },
             { path: 'bigMatrixSolver', component: BigMatrixSolverPageComponent },
+            { path: 'bigMatrixSolver/:taskKey/:taskName', component: BigMatrixSolverPageComponent },
             { path: 'savedTasks', component: SavedTasksPageComponent },
         ]
     },

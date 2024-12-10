@@ -5,7 +5,7 @@ import { Message } from '../interfaces/value-objects/message';
 @Injectable({
   providedIn: 'root'
 })
-export class WebsocketLltServiceService implements OnDestroy  {
+export class WebsocketLltService implements OnDestroy {
   private socket: WebSocket | null = null;
   private url: string = 'ws://localhost:5000/lltService';
 
@@ -57,7 +57,7 @@ export class WebsocketLltServiceService implements OnDestroy  {
   }
 
   ngOnDestroy() {
-    if(this.socket != null)
+    if (this.socket != null)
       this.socket.close();
   }
 }

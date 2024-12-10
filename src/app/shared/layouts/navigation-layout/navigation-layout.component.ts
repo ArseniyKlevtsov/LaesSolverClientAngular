@@ -1,7 +1,7 @@
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { WebsocketLltServiceService } from '../../services/websocket-llt.service.service';
+import { WebsocketLltService } from '../../services/websocket-llt.service.service';
 
 @Component({
   selector: 'app-navigation-layout',
@@ -14,7 +14,7 @@ import { WebsocketLltServiceService } from '../../services/websocket-llt.service
 export class NavigationLayoutComponent {
   isConnected: boolean = false;
 
-  constructor(private websocketService: WebsocketLltServiceService) {
+  constructor(private websocketService: WebsocketLltService) {
     this.isConnected = this.websocketService.isConnected;
 
     this.websocketService.onOpen.subscribe(() => {
