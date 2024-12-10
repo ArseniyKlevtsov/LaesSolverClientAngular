@@ -35,9 +35,10 @@ export class MatrixTaskStorageService {
     }
   }
 
-  deleteTask(taskKey: string): void {
+  deleteTask(TaskName: string): void {
     const tasks = this.getAllTasks();
-    const updatedTasks = tasks.filter(task => task.TaskKey !== taskKey);
+    console.log("DELETE TASK")
+    const updatedTasks = tasks.filter(task => task.TaskName !== TaskName);
     localStorage.setItem(this.storageKey, JSON.stringify(updatedTasks));
   }
 }

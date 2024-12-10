@@ -16,9 +16,18 @@
     <div class="mb-4 text-center">
         <label class="form-label">Upload the matrix and vector files(.csv):</label>
 
+
         <div class="d-flex justify-content-center">
-            <input type="file" class="form-control me-2" (change)="onMatrixFileChange($event)" />
-            <input type="file" class="form-control" (change)="onVectorFileChange($event)" />
+            <div class="me-2">
+                <label for="matrixFile" class="form-label">Select a matrix file (CSV):</label>
+                <input type="file" id="matrixFile" class="form-control" (change)="onMatrixFileChange($event)"
+                    accept=".csv" />
+            </div>
+            <div>
+                <label for="vectorFile" class="form-label">Select a vector file (CSV):</label>
+                <input type="file" id="vectorFile" class="form-control" (change)="onVectorFileChange($event)"
+                    accept=".csv" />
+            </div>
         </div>
     </div>
 
@@ -73,7 +82,8 @@
                 <p>the stop button stops sending/resending the task TaskName&TaskKey</p>
             </li>
             <li>
-                <p>the send the remaining button sends the parts of the matrix that are not on the server, you must be sure that
+                <p>the send the remaining button sends the parts of the matrix that are not on the server, you must be
+                    sure that
                     you
                     previously sent this particular file</p>
             </li>
@@ -81,16 +91,21 @@
     </div>
     <div class="text-center mb-4">
         <div class="btn-group" role="group" aria-label="Basic example">
-            <button class="btn btn-primary action-btn" (click)="startSending()">Start Sending</button>
-            <button class="btn btn-light action-btn" (click)="startSolving()" [disabled]="!taskName || !taskKey">Start Solving</button>
-            <button class="btn btn-success action-btn" (click)="getSolution()" [disabled]="!taskName || !taskKey">Get Solution</button>
+            <button class="btn btn-primary action-btn" (click)="startSending()" [disabled]="!taskKey || !isMatrixLoaded || !isVectorLoaded">Start Sending</button>
+            <button class="btn btn-light action-btn" (click)="startSolving()" [disabled]="!taskName || !taskKey || !canRequestSolving">Start
+                Solving</button>
+            <button class="btn btn-success action-btn" (click)="getSolution()" [disabled]="!taskName || !taskKey || !canRequestSolution">Get
+                Solution</button>
         </div>
     </div>
     <div class="text-center mb-4">
         <div class="btn-group" role="group" aria-label="Basic example">
-            <button class="btn btn-info action-btn" (click)="checkStatus()" [disabled]="!taskName || !taskKey">Check Status</button>
-            <button class="btn btn-danger action-btn" (click)="stopTask()" [disabled]="!taskName || !taskKey">Stop Task</button>
-            <button class="btn btn-warning action-btn" (click)="resend()" [disabled]="!taskName || !taskKey">Send the remaining</button>
+            <button class="btn btn-info action-btn" (click)="checkStatus()" [disabled]="!taskName || !taskKey">Check
+                Status</button>
+            <button class="btn btn-danger action-btn" (click)="stopTask()" [disabled]="!taskName || !taskKey || isStopActivated">Stop
+                Task</button>
+            <button class="btn btn-warning action-btn" (click)="resend()" [disabled]="!taskName || !taskKey || !isMatrixLoaded || !isVectorLoaded">Send the
+                remaining</button>
         </div>
     </div>
     <div class="console-container">
