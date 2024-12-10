@@ -117,6 +117,9 @@ export class BigMatrixSolverPageComponent implements OnInit, OnDestroy {
     if(taskInfo.Solved === true) {
       this.canRequestSolution = true;
     }
+    if(taskInfo.RowCount === taskInfo.ReceivedRows.length) {
+      this.canRequestSolving = true;
+    }
     this.taskInfo = taskInfo;
     if (this.isCheckStatusRequested) {
       this.isCheckStatusRequested = false;
@@ -293,6 +296,7 @@ private downloadCSV(content: string, filename: string): void {
 
   resend() {
     this.isStopActivated = false;
+    this.calculateUnsendedRows();
     this.sendNextRow();
   }
 
