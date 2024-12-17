@@ -7,7 +7,7 @@ import { Message } from '../interfaces/value-objects/message';
 })
 export class WebsocketLltService implements OnDestroy {
   private socket: WebSocket | null = null;
-  private url: string = 'ws://localhost:5000/lltService';
+  private url: string = 'ws://192.168.245.131:5001/lltService';
 
   public onOpen: Subject<any> = new Subject();
   public onMessage: Subject<Message> = new Subject();
